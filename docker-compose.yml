@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   # 1. Next.js Frontend
   web:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     restart: always
@@ -16,7 +14,7 @@ services:
 
   # 2. Python Backend (FastAPI + Scrapers)
   api:
-    build: 
+    build:
       context: ./backend
       dockerfile: Dockerfile
     restart: always
