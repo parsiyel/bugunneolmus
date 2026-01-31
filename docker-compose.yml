@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - DATABASE_URL=postgresql://bugun_user:bugun_password@db:5432/bugunneoldu
       # Add your API keys here in production via .env file
