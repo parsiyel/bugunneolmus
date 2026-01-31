@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    ports:
-      - "3000:3000"
     environment:
       - NODE_ENV=production
     depends_on:
@@ -18,8 +16,6 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: always
-    ports:
-      - "8001:8000"
     environment:
       - DATABASE_URL=postgresql://bugun_user:bugun_password@db:5432/bugunneoldu
       # Add your API keys here in production via .env file
