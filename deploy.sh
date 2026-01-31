@@ -31,6 +31,11 @@ docker compose up -d --build
 echo -e "${GREEN}Servis durumu kontrol ediliyor...${NC}"
 docker compose ps
 
+# 6. Temizlik (Opsiyonel ama önerilir)
+echo -e "${GREEN}Gereksiz dosyalar temizleniyor...${NC}"
+docker system prune -f # Sadece dangling (boşta kalan) imajları siler
+docker builder prune -f # Build önbelleğini temizler
+
 echo -e "${GREEN}Kurulum Tamamlandı!${NC}"
 echo "Frontend: http://localhost:80 (veya sunucu IP adresiniz)"
 echo "Backend API: http://localhost:80/api/docs"
