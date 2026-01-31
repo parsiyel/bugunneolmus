@@ -8,6 +8,7 @@ export const MOCK_EVENTS = [
         type: "breaking" as EventType,
         verification_status: "verified" as VerificationStatus,
         date: new Date().toISOString(),
+        category: "Gündem",
         view_count: 12500,
         source_count: 5,
         sources: [
@@ -22,6 +23,7 @@ export const MOCK_EVENTS = [
         type: "viral" as EventType,
         verification_status: "verified" as VerificationStatus,
         date: new Date(Date.now() - 3600000).toISOString(),
+        category: "Yaşam",
         view_count: 500000,
         source_count: 12,
         sources: [
@@ -36,6 +38,7 @@ export const MOCK_EVENTS = [
         type: "history" as EventType,
         verification_status: "claim" as VerificationStatus,
         date: new Date(Date.now() - 7200000).toISOString(),
+        category: "Kültür",
         view_count: 8500,
         source_count: 3,
         sources: [
