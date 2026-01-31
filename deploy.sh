@@ -21,6 +21,10 @@ systemctl stop apache2 || true
 # Port 80'i kullanan herhangi bir işlemi sonlandır
 fuser -k 80/tcp || true
 
+# Eski Docker servislerini durdur ve ağı temizle
+echo -e "${YELLOW}Eski Docker servisleri durduruluyor...${NC}"
+docker compose down || true
+
 # 3. Docker imajlarını oluştur ve başlat
 echo -e "${GREEN}Konteynerler oluşturuluyor ve başlatılıyor...${NC}"
 docker compose up -d --build
