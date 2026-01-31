@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # 1. Next.js Frontend
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - api
+
+  # 2. Python Backend (FastAPI + Scrapers)
+  api:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://bugun_user:bugun_password@db:5432/bugunneoldu
+      # Add your API keys here in production via .env file
+      # - TELEGRAM_API_ID=${TELEGRAM_API_ID}
+      # - TELEGRAM_API_HASH=${TELEGRAM_API_HASH}
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app # Hot reload for dev, specific binding for prod
+
+  # 3. Database (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: bugun_user
+      POSTGRES_PASSWORD: bugun_password
+      POSTGRES_DB: bugunneoldu
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # 4. Reverse Proxy (Nginx)
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - web
+      - api
+
+volumes:
+  pgdata:
