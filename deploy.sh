@@ -13,15 +13,7 @@ mkdir -p nginx/conf.d
 mkdir -p backend/app
 mkdir -p pgdata
 
-# 2. Port Temizliği (ÖNEMLİ: Çakışmaları önlemek için)
-echo -e "${YELLOW}Port 80 (Web Sunucusu) temizleniyor...${NC}"
-# Mevcut web sunucularını durdur
-systemctl stop nginx || true
-systemctl stop apache2 || true
-# Port 80'i kullanan herhangi bir işlemi sonlandır
-fuser -k 80/tcp || true
-
-# Eski Docker servislerini durdur ve ağı temizle
+# 2. Eski Docker servislerini durdur ve ağı temizle
 echo -e "${YELLOW}Eski Docker servisleri durduruluyor...${NC}"
 docker compose down || true
 
@@ -39,5 +31,4 @@ docker system prune -f
 docker builder prune -f
 
 echo -e "${GREEN}Kurulum Tamamlandı!${NC}"
-echo "Frontend: http://localhost:80 (veya sunucu IP adresiniz)"
-echo "Backend API: http://localhost:80/api/docs"
+echo "Uygulama: http://localhost:8080 (veya sunucu IP adresiniz:8080)"
